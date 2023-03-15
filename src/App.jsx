@@ -1,66 +1,32 @@
 import React, { useState, useEffect } from "react";
-import wallpaper from "./assets/images/weather-wallpapers.jpg";
+import axios from "axios";
+
+import Card from "./components/card";
+import Tiles from "./components/tiles";
 
 const App = () => {
-	const [response, setResponse] = useState({});
+	const [data, setData] = useState({});
+
+	useEffect(() => {
+		axios
+			.get(
+				"https://api.openweathermap.org/data/2.5/forecast?lat=43.219816&lon=27.903659&appid=acdef770b69db9dd76eee3d335a25eb9&units=metric&cnt=5"
+			)
+			.then((response) => {
+				const newData = response.data;
+				setData(newData);
+			})
+			.catch((error) => console.log(error));
+	}, []);
 
 	return (
 		<div className="App">
-			<div className="card">
-				<div className="card__image">
-					<img src={wallpaper} alt="" />
-				</div>
-
-				<div className="card__content">
-					<h3>Varna</h3>
-
-					<h2>34F</h2>
-
-					<div className="span">Clouds</div>
-				</div>
-			</div>
-
-			<ul className="tiles">
-				<li>
-					<div className="tile">
-						<h6>34f</h6>
-
-						<p>Monday</p>
-					</div>
-				</li>
-
-				<li>
-					<div className="tile">
-						<h6>34f</h6>
-
-						<p>Monday</p>
-					</div>
-				</li>
-
-				<li>
-					<div className="tile">
-						<h6>34f</h6>
-
-						<p>Monday</p>
-					</div>
-				</li>
-
-				<li>
-					<div className="tile">
-						<h6>34f</h6>
-
-						<p>Monday</p>
-					</div>
-				</li>
-
-				<li>
-					<div className="tile">
-						<h6>34f</h6>
-
-						<p>Monday</p>
-					</div>
-				</li>
-			</ul>
+			{Object.keys(data).length > 1 && (
+				<main>
+					<Card data={data} />
+					<Tiles list={data.list} />
+				</main>
+			)}
 		</div>
 	);
 };
