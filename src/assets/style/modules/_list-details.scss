@@ -1,0 +1,12 @@
+.list-details {
+	li {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	small {
+		display: inline-block;
+		margin-left: 2rem;
+	}
+}
