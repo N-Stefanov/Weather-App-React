@@ -1,3 +1,5 @@
+import Tile from "./tile";
+
 const Tiles = ({ list }) => {
 	const weekDays = [
 		"Monday",
@@ -9,6 +11,15 @@ const Tiles = ({ list }) => {
 		"Sunday",
 	];
 
+	const uniqueDays = list.filter((value, index, self) => {
+		return (
+			index ===
+			self.findIndex(
+				(t) => t.dt_txt.split(" ")[0] === value.dt_txt.split(" ")[0]
+			)
+		);
+	});
+
 	const dayInAWeek = new Date().getDay();
 
 	const days = weekDays
@@ -18,28 +29,10 @@ const Tiles = ({ list }) => {
 
 	return (
 		<ul className="tiles">
-			{list.map((tile, index) => {
-				const { main, weather } = tile;
-				const { temp_max: max, temp_min: min } = main;
-				const { description, icon } = weather[0];
-
-				const iconUrl = ` https://openweathermap.org/img/wn/${icon}@2x.png`;
-				const maxRound = Math.round(max);
-				const minRound = Math.round(min);
-
+			{uniqueDays.slice(0, 5).map((tile, index) => {
 				return (
 					<li key={index}>
-						<div className="tile">
-							<h6>
-								{minRound}&#176; / {maxRound}&#176;
-							</h6>
-
-							<img src={iconUrl} alt="" />
-
-							<p>{description}</p>
-
-							<p>{days[index]}</p>
-						</div>
+						<Tile tile={tile} day={days[index]} list={list} />
 					</li>
 				);
 			})}
