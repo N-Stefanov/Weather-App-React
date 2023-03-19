@@ -7,6 +7,10 @@
 	background-color: rgba($color: #000000, $alpha: .5);
 	border-radius: 1rem;
 
+	@media(max-width: 768px) {
+		width: 100%;
+	}
+
 	&__head {
 		padding-right: 10rem;
 	}
@@ -21,6 +25,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		@media(max-width: 768px) {
+			display: block;
+		}
 	}
 
 	span {
@@ -28,5 +36,9 @@
 		font-size: 9rem;
 		font-weight: 700;
 		text-align: center;
+
+		@media(max-width: 768px) {
+			font-size: 6rem;
+		}
 	}
 }

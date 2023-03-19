@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import Card from "./components/card";
 import Tiles from "./components/tiles";
 
 import wallpaper from "./assets/images/weather-wallpapers.jpg";
 
+import handleAjax from "./helpers/handle-ajax";
+
 const App = () => {
 	const [data, setData] = useState({});
 
 	useEffect(() => {
-		axios
-			.get(
-				"https://api.openweathermap.org/data/2.5/forecast?lat=43.219816&lon=27.903659&appid=acdef770b69db9dd76eee3d335a25eb9&units=metric&cnt"
-			)
-			.then((response) => {
+		handleAjax(
+			"https://api.openweathermap.org/data/2.5/forecast?lat=43.219816&lon=27.903659&appid=acdef770b69db9dd76eee3d335a25eb9&units=metric&cnt",
+			function (status, error) {
+				console.log(error);
+				return;
+			},
+			function (response, error) {
 				const newData = response.data;
 				setData(newData);
-			})
-			.catch((error) => console.log(error));
+			}
+		);
 	}, []);
 
 	return (

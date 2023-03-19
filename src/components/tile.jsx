@@ -1,9 +1,19 @@
+import React, { useState } from "react";
 import ModalIndo from "./modal-info";
+import Button from "./button";
 
 const Tile = ({ tile, day, list }) => {
 	const { main, weather, dt_txt: date } = tile;
 	const { temp_max: max, temp_min: min } = main;
 	const { description, icon } = weather[0];
+
+	const [showModal, setShowModal] = useState(false);
+
+	const handleShowModal = () => {
+		setShowModal(!showModal);
+
+		document.querySelector("body").classList.toggle("is-fixed");
+	};
 
 	const iconUrl = ` https://openweathermap.org/img/wn/${icon}@2x.png`;
 	const maxRound = Math.round(max);
@@ -14,7 +24,7 @@ const Tile = ({ tile, day, list }) => {
 	});
 
 	return (
-		<div className="tile">
+		<div className="tile" onClick={() => handleShowModal()}>
 			<div className="tile__inner">
 				<div className="tile__main">
 					<h6>
@@ -28,13 +38,13 @@ const Tile = ({ tile, day, list }) => {
 					<p>{day}</p>
 				</div>
 
-				<div className="modal-info">
-					<div className="modal__inner">
-						{detailedInformationAboutTheDay.map((item) => {
-							return <ModalIndo item={item} />;
-						})}
-					</div>
-				</div>
+				<Button>More Info</Button>
+
+				<ModalIndo
+					listInfo={detailedInformationAboutTheDay}
+					isVisible={showModal}
+					handleShowModal={handleShowModal}
+				/>
 			</div>
 		</div>
 	);

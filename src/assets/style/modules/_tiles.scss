@@ -5,9 +5,28 @@
 	z-index: 1;
 	list-style: none;
 	gap: 1rem;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	@media(max-width: 768px) {
+		overflow: auto;
+		flex-wrap: nowrap;
+		padding: 0;
+		justify-content: flex-start;
+	}
 
 	li {
 		flex: 0 0 calc(20% - 1rem);
 		max-width: calc(20% - 1rem);
+
+		@media(max-width: 1024px){
+			flex: 0 0 calc(33% - 1rem);
+			max-width: calc(33% - 1rem);
+		}
+
+		@media(max-width: 768px) {
+			flex: 0 0 15rem;
+			max-width: 15rem;
+		}
 	}
 }

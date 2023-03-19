@@ -14,6 +14,10 @@ body {
 	font-size: 1.6rem;
 	line-height: 1.4;
 	color: #fff;
+
+	&.is-fixed {
+		overflow: hidden;
+	}
 }
 
 a {
@@ -33,26 +37,46 @@ a {
 .h1,
 h1 {
 	font-size: 4rem;
+
+	@media(max-width: 768px) {
+		font-size: 3.2rem;
+	}
 }
 
 .h2,
 h2 {
 	font-size: 3.6rem;
+
+	@media(max-width: 768px) {
+		font-size: 3rem;
+	}
 }
 
 .h3,
 h3 {
 	font-size: 3.2rem;
+
+	@media(max-width: 768px) {
+		font-size: 2.8rem;
+	}
 }
 
 .h4,
 h4 {
 	font-size: 2.9rem;
+
+	@media(max-width: 768px) {
+		font-size: 2.6rem;
+	}
 }
 
 .h5,
 h5 {
 	font-size: 2.6rem;
+
+	@media(max-width: 768px) {
+		font-size: 2.2rem;
+	}
 }
 
 .h6,
